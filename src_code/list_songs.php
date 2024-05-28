@@ -12,10 +12,10 @@ require_once 'config.inc.php';
 <?php
 require_once 'header.inc.php';
 ?>
-<div class="UsersPage">
-    <div class="usersPageHeader" style="background-image: url(https://miro.medium.com/v2/resize:fit:1400/1*aGtb2VHBugJTa4LqqzOIaA.jpeg)">
+<div class="ArtistsPage">
+    <div class="ArtistsPageHeader" style="background-image: url(https://media.pitchfork.com/photos/638902d5f777c8e284615da3/master/pass/SZA.jpg)">
         <h1><i id="spotifyLogo" class="fa-brands fa-spotify"></i> Spotify Songs PHP Database</h1>
-        <span>Database that contains all of the registered Spotify Songs in our Database.</span>
+        <span>Database that contains all of the registered Spotify Songs</span>
     </div>
 
     <div class="searchBar">
