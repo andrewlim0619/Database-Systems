@@ -34,30 +34,30 @@ require_once 'header.inc.php';
         die("Connection failed: " . $conn->connect_error);
     }
 
-	// Prepare SQL Statement
-    $sql = "SELECT CustomerNumber,CustomerName FROM customer ORDER BY CustomerName";
+    // Prepare SQL Statement
+    $sql = "SELECT ArtistID, artistName FROM Artist ORDER BY ArtistID";
     $stmt = $conn->stmt_init();
     if (!$stmt->prepare($sql)) {
-        echo "failed to prepare";
-    }
-    else {
-		
-		// Execute the Statement
+        echo "Failed to prepare the SQL statement.";
+    } else {
+        // Execute the Statement
         $stmt->execute();
-		
-		// Loop Through Result
-        $stmt->bind_result($customerNumber,$customerName);
+
+        // Bind result variables
+        $stmt->bind_result($artistID, $artistName);
+
+        // Fetch values and display results
         echo "<ol>";
         echo "<h2>List of Artists</h2>";
         while ($stmt->fetch()) {
-            echo '<li><a href="show_customer.php?id='  . $customerNumber . '">' . $customerName . '</a></li>';
+            echo '<li><a href="show_artist.php?id=' . $artistID . '">' . $artistID . ' - ' . $artistName . '</a></li>';
         }
         echo "</ol>";
     }
 
-	// Close Connection
+    // Close statement and connection
+    $stmt->close();
     $conn->close();
-
     ?>
     </div>
 </div>
