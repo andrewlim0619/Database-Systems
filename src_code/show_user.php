@@ -9,18 +9,19 @@ require_once 'config.inc.php';
 // Get Customer Number
 $id = $_GET['id'];
 if ($id === "") {
-    header('location: list_customers.php');
+    header('location: list_users.php');
     exit();
 }
 if ($id === false) {
-    header('location: list_customers.php');
+    header('location: list_users.php');
     exit();
 }
 if ($id === null) {
-    header('location: list_customers.php');
+    header('location: list_users.php');
     exit();
 }
 ?>
+
 <html>
 <head>
     <title>User Profile</title>
@@ -37,49 +38,70 @@ require_once 'header.inc.php';
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "SELECT CustomerNumber, CustomerName, StreetAddress, CityName, StateCode, PostalCode FROM customer C " .
-            "INNER JOIN address A ON C.defaultAddressID = A.addressID WHERE CustomerNumber = ?";
+        // Fetch user information
+        $sql = "SELECT UserID, username, email, firstName, lastName, birthDate, age FROM User WHERE UserID = ?";
         $stmt = $conn->stmt_init();
         if (!$stmt->prepare($sql)) {
-            echo "failed to prepare";
+            echo "Failed to prepare the SQL statement.";
         } else {
-            $stmt->bind_param('s', $id);
+            $stmt->bind_param('i', $id);
             $stmt->execute();
-            $stmt->bind_result($customerNumber, $customerName, $streetName, $cityName, $stateCode, $postalCode);
+            $stmt->bind_result($userID, $username, $email, $firstName, $lastName, $birthDate, $age);
+
             echo "<div class='profile-card'>";
             while ($stmt->fetch()) {
                 echo '
                     <div class="card-header">
-                        <img src="https://cdns-images.dzcdn.net/images/cover/134fc31d51182276b6fbcc8be24bcc9a/500x500.jpg" alt="User Image">
-                        <h2>' . $customerName . '</h2>
-                        <button class="edit-profile"><a href="update_customer.php?id=' . $customerNumber . '">Update Profile</a></button>
+                        <img src="https://i.scdn.co/image/ab676161000051747baf6a3e4e70248079e48c5a" alt="User Image">
+                        <h2>' . $username . '</h2>
+                        <button class="edit-profile"><a href="update_user.php?id=' . $userID . '">Update Profile</a></button>
                     </div>
 
                     <div class="card-body">
                         <div class="profile-stats">
                             <div class="stat-item">
-                            <h3>Followers</h3>
-                            <p>50</p>
+                                <h3>Followers</h3>
+                                <p>50</p>
+                            </div>
+
+                            <div class="stat-item">
+                                <h3>Following</h3>
+                                <p>1.2K</p>
+                            </div>
                         </div>
 
-                        <div class="stat-item">
-                            <h3>Following</h3>
-                            <p>1.2K</p>
-                        </div>
-                    </div>
-
-                    <div class="card-links">
-                        <a>Name: </a>
-                        <a>email: </a>
-                        <a>birthDate: </a>
-                        <a>Age: </a>
-                        <a href="">Playlist</a>
-                        <a href="">Listening History</a>
-                    </div>
-                </div>';
+                        <div class="card-links">
+                            <p><strong>Name:</strong> ' . $firstName . ' ' . $lastName . '</p>
+                            <p><strong>Email:</strong> ' . $email . '</p>
+                            <p><strong>Birth Date:</strong> ' . $birthDate . '</p>
+                            <p><strong>Age:</strong> ' . $age . '</p>
+                        </div>';
             }
             echo "</div>";
         }
+
+        // Fetch user playlists
+        $sql = "SELECT PlaylistID, playlistName FROM Playlist WHERE playlistCreator = ?";
+        $stmt = $conn->stmt_init();
+        if (!$stmt->prepare($sql)) {
+            echo "Failed to prepare the SQL statement for playlists.";
+        } else {
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $stmt->bind_result($playlistID, $playlistName);
+
+            echo "<p>User Playlists</p>";
+            while ($stmt->fetch()) {
+                $hasPlaylists = true;
+                echo '<p>PlaylistID: ' . $playlistID . ' | Playlist Name: ' . $playlistName . '</p>';
+            }
+            
+            if (!$hasPlaylists) {
+                echo '<p>This user has not created any playlists.</p>';
+            }
+        }
+
+        $stmt->close();
         $conn->close();
         ?>
     </div>

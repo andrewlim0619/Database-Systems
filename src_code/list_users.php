@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: MKochanski
- * Date: 7/24/2018
- * Time: 3:07 PM
- */
 require_once 'config.inc.php';
-
 ?>
+
 <html>
 <head>
     <title>Users PHP Database</title>
@@ -34,30 +28,30 @@ require_once 'header.inc.php';
         die("Connection failed: " . $conn->connect_error);
     }
 
-	// Prepare SQL Statement
-    $sql = "SELECT CustomerNumber,CustomerName FROM customer ORDER BY CustomerName";
+    // Prepare SQL Statement
+    $sql = "SELECT UserID, username FROM User ORDER BY UserID";
     $stmt = $conn->stmt_init();
     if (!$stmt->prepare($sql)) {
-        echo "failed to prepare";
-    }
-    else {
-		
-		// Execute the Statement
+        echo "Failed to prepare the SQL statement.";
+    } else {
+        // Execute the Statement
         $stmt->execute();
-		
-		// Loop Through Result
-        $stmt->bind_result($customerNumber,$customerName);
+
+        // Bind result variables
+        $stmt->bind_result($userID, $username);
+
+        // Fetch values and display results
         echo "<ol>";
         echo "<h2>List of Users</h2>";
         while ($stmt->fetch()) {
-            echo '<li><a href="show_user.php?id='  . $customerNumber . '">' . $customerName . '</a></li>';
+            echo '<li><a href="show_user.php?id=' . $userID . '">' . $userID . ' - ' . $username . '</a></li>';
         }
         echo "</ol>";
     }
 
-	// Close Connection
+    // Close statement and connection
+    $stmt->close();
     $conn->close();
-
     ?>
     </div>
 </div>
