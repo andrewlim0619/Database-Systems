@@ -17,5 +17,6 @@
         <a href="index.php">Home</a>
         <a href="list_users.php">Users</a>
         <a href="list_artists.php">Artists</a>
+        <a href="list_songs.php">All Music</a>
     </div>
 </div>

@@ -70,7 +70,7 @@ require_once 'header.inc.php';
                 <div class="avatar" style="background-image: url(https://avatars.githubusercontent.com/u/118507351?v=4)"></div>
                 <div class="info">
                     <p class="name">Travis Khiem Huynh</p>
-                    <p class="email">huynhtk51@gmail.com</p>
+                    <p class="email">travis51@uw.edu</p>
                 </div>
             </div>
         </div>
