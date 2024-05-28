@@ -6,7 +6,7 @@
  * Time: 2:47 PM
  */
 $servername = 'vergil.u.washington.edu'; // Your Server (if noot)
-$username = 'your-mysql-user';
-$password = 'your-password';
-$database = 'your-database';
-$port = 20345; // Your Port
+$username = 'root';
+$password = 'css475group3';
+$database = 'spotifydb';
+$port = 4306; // Your Port
