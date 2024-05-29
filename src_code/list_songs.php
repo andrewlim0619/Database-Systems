@@ -32,8 +32,8 @@ require_once 'header.inc.php';
                 <option value="">Filter by Season</option>
                 <option value="spring">Spring</option>
                 <option value="summer">Summer</option>
-                <option value="Winter">Spring</option>
-                <option value="Autumn">Summer</option>
+                <option value="Winter">Winter</option>
+                <option value="Autumn">Autumn</option>
             </select>
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>
