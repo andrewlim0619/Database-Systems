@@ -10,7 +10,7 @@ require_once 'config.inc.php';
 ?>
 <html>
 <head>
-    <title>Users PHP Database</title>
+    <title>Artists PHP Database</title>
     <link rel="stylesheet" href="base.css">
     <script src="https://kit.fontawesome.com/224258cc50.js" crossorigin="anonymous"></script>
 </head>

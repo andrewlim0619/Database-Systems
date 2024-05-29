@@ -31,7 +31,7 @@ if ($id === null) {
 <?php
 require_once 'header.inc.php';
 ?>
-    <div class="userProfilePage">
+    <div class="artistProfilePage">
         <?php
         $conn = new mysqli($servername, $username, $password, $database, $port);
         if ($conn->connect_error) {
@@ -60,13 +60,13 @@ require_once 'header.inc.php';
                     <div class="card-body">
                         <div class="profile-stats">
                             <div class="stat-item">
-                                <h3>Rank</h3>
-                                <p>' . $artistRank . '</p>
+                                <h3>Followers</h3>
+                                <p>2,021,234</p>
                             </div>
 
                             <div class="stat-item">
-                                <h3>Country</h3>
-                                <p>' . $country . '</p>
+                                <h3>Monthly Listeners</h3>
+                                <p>24,163,883</p>
                             </div>
                         </div>
 
@@ -95,7 +95,9 @@ require_once 'header.inc.php';
             $hasAlbums = false;
             while ($stmt->fetch()) {
                 $hasAlbums = true;
-                echo '<p>AlbumID: ' . $albumID . ' | Album Title: ' . $albumTitle . '</p>';
+                echo '<a href="">AlbumID: ' . $albumID . ' | Album Title: ' . $albumTitle . '</a>'; 
+                echo '<br>';
+                echo '<br>';
             }
 
             if (!$hasAlbums) {

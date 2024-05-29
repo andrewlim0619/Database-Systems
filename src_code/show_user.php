@@ -90,15 +90,54 @@ require_once 'header.inc.php';
             $stmt->execute();
             $stmt->bind_result($playlistID, $playlistName);
 
-            echo "<p>User Playlists</p>";
+            echo "<div class='card-links'>";
+            echo "<h3>User Playlists</h3>";
+            $hasPlaylists = false;
             while ($stmt->fetch()) {
                 $hasPlaylists = true;
-                echo '<p>PlaylistID: ' . $playlistID . ' | Playlist Name: ' . $playlistName . '</p>';
+                echo '<a href="">Playlist Name: ' . $playlistName . '</a>';
+                echo '<br>';
+                echo '<br>';
             }
-            
+
             if (!$hasPlaylists) {
                 echo '<p>This user has not created any playlists.</p>';
             }
+            echo "</div>";
+        }
+
+        // Fetch user liked songs
+        $sql = "SELECT Songs.title, Artist.artistName, Albums.Title as albumTitle 
+                FROM UserLikedSongs 
+                JOIN Songs ON UserLikedSongs.SongID = Songs.SongID 
+                JOIN Artist ON Songs.ArtistID = Artist.ArtistID 
+                JOIN Albums ON Songs.AlbumID = Albums.AlbumID
+                WHERE UserLikedSongs.UserID = ?
+                ORDER BY Songs.title";
+        $stmt = $conn->stmt_init();
+        if (!$stmt->prepare($sql)) {
+            echo "Failed to prepare the SQL statement for liked songs.";
+        } else {
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $stmt->bind_result($songTitle, $artistName, $albumTitle);
+
+            echo "<div class='card-links'>";
+            echo "<h3>User Liked Songs</h3>";
+            $hasLikedSongs = false;
+            echo "<table>";
+            echo "<tr class='table-header'><th>#</th><th>Title</th><th>Artist</th><th>Album</th></tr>";
+            $index = 1;
+            while ($stmt->fetch()) {
+                $hasLikedSongs = true;
+                echo '<tr><td>' . $index++ . '</td><td>' . $songTitle . '</td><td>' . $artistName . '</td><td>' . $albumTitle . '</td></tr>';
+            }
+            echo "</table>";
+
+            if (!$hasLikedSongs) {
+                echo '<p>This user has not liked any songs.</p>';
+            }
+            echo "</div>";
         }
 
         $stmt->close();
