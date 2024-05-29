@@ -21,6 +21,20 @@ require_once 'header.inc.php';
     <div class="searchBar">
         <form method="GET" action="">
             <input type="text" name="search" placeholder="Search songs..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+            <select name="weather">
+                <option value="">Filter by Weather</option>
+                <option value="sunny">Sunny</option>
+                <option value="rainy">Rainy</option>
+                <option value="Snowy">Snowy</option>
+                <option value="Cloudy">Cloudy</option>
+            </select>
+            <select name="season">
+                <option value="">Filter by Season</option>
+                <option value="spring">Spring</option>
+                <option value="summer">Summer</option>
+                <option value="Winter">Spring</option>
+                <option value="Autumn">Summer</option>
+            </select>
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>
     </div>
@@ -35,22 +49,27 @@ require_once 'header.inc.php';
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Prepare SQL Statement with search functionality
+    // Prepare SQL Statement with search functionality and filters
     $search = isset($_GET['search']) ? '%' . $_GET['search'] . '%' : '%';
+    $weatherFilter = isset($_GET['weather']) && !empty($_GET['weather']) ? $_GET['weather'] : '%';
+    $seasonFilter = isset($_GET['season']) && !empty($_GET['season']) ? $_GET['season'] : '%';
+
     $sql = "
         SELECT Songs.SongID, Songs.title, Artist.artistName AS artist_name
         FROM Songs
         JOIN Artist ON Songs.ArtistID = Artist.ArtistID
-        WHERE Songs.title LIKE ? OR Artist.artistName LIKE ? OR Songs.weather LIKE ? OR Songs.season LIKE ?
+        WHERE (Songs.title LIKE ? OR Artist.artistName LIKE ?)
+        AND (Songs.weather LIKE ? OR ? = '%')
+        AND (Songs.season LIKE ? OR ? = '%')
         ORDER BY Songs.SongID
     ";
-    
+
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
         echo "Failed to prepare the SQL statement. Error: " . $conn->error;
     } else {
         // Bind parameters
-        $stmt->bind_param("ssss", $search, $search, $search, $search);
+        $stmt->bind_param("ssssss", $search, $search, $weatherFilter, $weatherFilter, $seasonFilter, $seasonFilter);
 
         // Execute the Statement
         if (!$stmt->execute()) {
@@ -61,9 +80,9 @@ require_once 'header.inc.php';
 
             // Fetch values and display results
             echo "<ol>";
-            echo "<h2>Complete Music List</h2>";
+            echo "<h2>Filtered Music List</h2>";
             while ($stmt->fetch()) {
-                echo '<li><a href="show_user.php?id=' . $SongID . '">' . $SongID . ' - ' . $title . ' by ' . $artist_name . '</a></li>';
+                echo '<li><a' . $SongID . '">' . $SongID . ' - ' . $title . ' by ' . $artist_name . '</a></li>';
             }
             echo "</ol>";
         }
