@@ -1,0 +1,150 @@
+/* --------------------------------
+    Styling for the Navigation Bar
+   -------------------------------- */
+
+/* Add a black background color to the top navigation */
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #333;
+    color: white;
+}
+
+.topnav {
+    display: flex;
+    justify-content: center;
+    width: 70%;
+    background-color: #333;
+    overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 200;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+    text-decoration: underline;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#spotifyLogo {
+    color: #4CAF50;   
+}
+
+
+/* --------------------------------
+    Styling for the Album Page
+   -------------------------------- */
+body {
+    background-color: rgb(25, 20, 20);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.AlbumPage {
+    max-width: 70%;
+    margin: 0 auto;
+    padding: 20px;
+    padding-top: 20px;
+    color: #f2f2f2;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 200;
+    background: linear-gradient(180deg, #ffba6c, rgb(25, 20, 20));
+}
+
+.AlbumHeader {
+    max-height: 30%;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: 20px;
+    text-align: left;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);  
+    /* background-image: url('https://miro.medium.com/v2/resize:fit:1400/1*aGtb2VHBugJTa4LqqzOIaA.jpeg'); */
+}
+
+.albumAvatar {
+    width: 250px;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    /* background-image: url('https://avatars.githubusercontent.com/u/114616307?v=4'); */
+    margin-right: 20px;
+}
+
+.albumInfo {
+    color: #f2f2f2;
+}
+
+.albumInfo p {
+    padding-top: 125px;
+    font-size: 20px;
+    margin: 0;
+}
+
+.albumInfo h1 {
+    font-size: 60px;
+    margin: 5px 0;
+}
+
+.albumInfo span {
+    font-size: 30px;
+}
+
+.songsInAlbum {
+    margin-top: 40px; /* Added margin to separate the list from the header */
+}
+
+.song-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.song-table th, .song-table td {
+    padding: 8px;
+    color: #f2f2f2;
+}
+
+.song-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.song-table td {
+    text-align: left;
+}
+
+.song-table .duration {
+    text-align: right;
+}
+
+.song-table a {
+    color: #f2f2f2;
+}
+
+.song-table a:hover {
+    text-decoration: underline;
+    color: #4CAF50;
+}

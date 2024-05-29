@@ -6,17 +6,10 @@
  * Time: 3:07 PM
  */
 require_once 'config.inc.php';
-// Get Artist ID
-$id = $_GET['id'];
-if ($id === "") {
-    header('location: list_artists.php');
-    exit();
-}
-if ($id === false) {
-    header('location: list_artists.php');
-    exit();
-}
-if ($id === null) {
+
+// Get Artist ID from the URL
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+if ($id <= 0) {
     header('location: list_artists.php');
     exit();
 }
@@ -38,23 +31,30 @@ require_once 'header.inc.php';
             die("Connection failed: " . $conn->connect_error);
         }
 
-        // Fetch artist information
-        $sql = "SELECT ArtistID, artistName, country, ArtistRank FROM Artist WHERE ArtistID = ?";
+        // Fetch artist information including listener count from ListeningHistoryArtist
+        $sql = "
+            SELECT a.ArtistID, a.artistName, a.country, a.ArtistRank, COALESCE(l.listenerCount, 0) AS listenerCount
+            FROM Artist a
+            LEFT JOIN ListeningHistoryArtist l 
+                ON a.ArtistID = l.ArtistID
+            WHERE a.ArtistID = ?
+            ORDER BY l.year DESC, l.month DESC
+            LIMIT 1";
         $stmt = $conn->stmt_init();
         if (!$stmt->prepare($sql)) {
             echo "Failed to prepare the SQL statement.";
         } else {
             $stmt->bind_param('i', $id);
             $stmt->execute();
-            $stmt->bind_result($artistID, $artistName, $country, $artistRank);
+            $stmt->bind_result($artistID, $artistName, $country, $artistRank, $listenerCount);
 
             echo "<div class='profile-card-artist'>";
             while ($stmt->fetch()) {
                 echo '
                     <div class="card-header">
                         <img src="https://i.scdn.co/image/ab676161000051747baf6a3e4e70248079e48c5a" alt="Artist Image">
-                        <h2>' . $artistName . '</h2>
-                        <button class="edit-profile"><a href="update_artist.php?id=' . $artistID . '">Update Profile</a></button>
+                        <h2>' . htmlspecialchars($artistName) . '</h2>
+                        <button class="edit-profile"><a href="update_artist.php?id=' . htmlspecialchars($artistID) . '">Update Profile</a></button>
                     </div>
 
                     <div class="card-body">
@@ -66,14 +66,14 @@ require_once 'header.inc.php';
 
                             <div class="stat-item">
                                 <h3>Monthly Listeners</h3>
-                                <p>24,163,883</p>
+                                <p>' . htmlspecialchars(number_format($listenerCount)) . '</p>
                             </div>
                         </div>
 
                         <div class="card-links">
-                            <p><strong>Artist Name:</strong> ' . $artistName . '</p>
-                            <p><strong>Country:</strong> ' . $country . '</p>
-                            <p><strong>Rank:</strong> ' . $artistRank . '</p>
+                            <p><strong>Artist Name:</strong> ' . htmlspecialchars($artistName) . '</p>
+                            <p><strong>Country:</strong> ' . htmlspecialchars($country) . '</p>
+                            <p><strong>Rank:</strong> ' . htmlspecialchars($artistRank) . '</p>
                         </div>';
             }
             echo "</div>";
@@ -95,7 +95,7 @@ require_once 'header.inc.php';
             $hasAlbums = false;
             while ($stmt->fetch()) {
                 $hasAlbums = true;
-                echo '<a href="">AlbumID: ' . $albumID . ' | Album Title: ' . $albumTitle . '</a>'; 
+                echo '<a href="show_albums.php?albumID=' . htmlspecialchars($albumID). '">AlbumID: ' . htmlspecialchars($albumID) . ' | Album Title: ' . htmlspecialchars($albumTitle) . '</a>';   
                 echo '<br>';
                 echo '<br>';
             }

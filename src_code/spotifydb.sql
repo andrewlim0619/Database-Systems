@@ -33,7 +33,7 @@ CREATE TABLE Artist (
 );
 
 CREATE TABLE User (
-    UserID INT PRIMARY KEY,
+    UserID INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -276,14 +276,14 @@ INSERT INTO User (UserID, username, email, password, firstName, lastName, birthD
 -- Dummy data for the Albums table
 INSERT INTO Albums (AlbumID, ArtistID, Title, coverImage, releaseDate, duration) VALUES
 -- Ed Sheeran
-(1, 1, 'Divide', 'divide_cover.jpg', '2017-03-03', 2400),
-(2, 1, 'Multiply', 'multiply_cover.jpg', '2014-06-20', 2550),
-(3, 1, 'Plus', 'plus_cover.jpg', '2011-09-09', 2340),
+(1, 1, 'Divide', 'https://upload.wikimedia.org/wikipedia/en/4/45/Divide_cover.png', '2017-03-03', 2400),
+(2, 1, 'Multiply', 'https://upload.wikimedia.org/wikipedia/en/a/ad/X_cover.png', '2014-06-20', 2550),
+(3, 1, 'Plus', 'https://upload.wikimedia.org/wikipedia/en/thumb/3/3f/Ed_Sheeran_%2B_cover.png/220px-Ed_Sheeran_%2B_cover.png', '2011-09-09', 2340),
 
 -- Taylor Swift
-(4, 2, '1989', '1989_cover.jpg', '2014-10-27', 2100),
-(5, 2, 'Fearless', 'fearless_cover.jpg', '2008-11-11', 2300),
-(6, 2, 'Red', 'red_cover.jpg', '2012-10-22', 2300),
+(4, 2, '1989', 'https://upload.wikimedia.org/wikipedia/en/d/d5/Taylor_Swift_-_1989_%28Taylor%27s_Version%29.png', '2014-10-27', 2100),
+(5, 2, 'Fearless', 'https://upload.wikimedia.org/wikipedia/en/8/86/Taylor_Swift_-_Fearless.png', '2008-11-11', 2300),
+(6, 2, 'Red', 'https://upload.wikimedia.org/wikipedia/en/thumb/4/47/Taylor_Swift_-_Red_%28Taylor%27s_Version%29.png/220px-Taylor_Swift_-_Red_%28Taylor%27s_Version%29.png', '2012-10-22', 2300),
 
 -- BTS
 (7, 3, 'Love Yourself: Tear', 'love_yourself_tear_cover.jpg', '2018-05-18', 2700),
@@ -606,12 +606,12 @@ INSERT INTO UserLikedSongs (SongID, UserID) VALUES
 -- Dummy data for the Playlist table
 INSERT INTO Playlist (PlaylistID, playlistName, playlistImage, isPublic, playlistCreator) VALUES
 -- Playlists for User 1
-(1, 'Chill Vibes', 'chill_vibes_cover.jpg', 1, 1),
-(2, 'Morning Boost', 'morning_boost_cover.jpg', 1, 1),
+(1, 'Chill Vibes', 'https://i.pinimg.com/474x/a1/1b/17/a11b1719624fdffb407649ed9390ccd4.jpg', 1, 1),
+(2, 'Morning Boost', 'https://external-preview.redd.it/morning-vibes-a-morning-playlist-to-boost-your-mornings-v0-J9lTySWP2hav8FfmAtdMYc4R4WS106NeHqhXB_lrDmo.jpg?auto=webp&s=eddb66a740f50d4bc9e2a712bdb8569d0253c365', 1, 1),
 
 -- Playlists for User 2
-(3, 'Workout Hits', 'workout_hits_cover.jpg', 1, 2),
-(4, 'Evening Relaxation', 'evening_relaxation_cover.jpg', 1, 2),
+(3, 'Workout Hits', 'https://marketplace.canva.com/EAFyzlkEEcI/1/0/1600w/canva-black-illustrative-workout-playlist-cover-D8BP8RPEIe4.jpg', 1, 2),
+(4, 'Evening Relaxation', 'https://i.scdn.co/image/ab67706c0000da84b4288d98239b8aa63bd80571', 1, 2),
 
 -- Playlists for User 3
 (5, 'Party Anthems', 'party_anthems_cover.jpg', 1, 3),
@@ -751,14 +751,107 @@ ADD COLUMN weather VARCHAR(255),
 ADD COLUMN season VARCHAR(255);
 
 -- Update the weather and season for existing songs
-UPDATE Songs
-SET weather = 'Sunny', season = 'Summer'
-WHERE SongID = 1;
+-- Ed Sheeran
+UPDATE Songs SET weather = 'Sunny', season = 'Summer' WHERE SongID = 1;
+UPDATE Songs SET weather = 'Rainy', season = 'Autumn' WHERE SongID = 2;
+UPDATE Songs SET weather = 'Cloudy', season = 'Spring' WHERE SongID = 3;
+UPDATE Songs SET weather = 'Snowy', season = 'Winter' WHERE SongID = 4;
+UPDATE Songs SET weather = 'Windy', season = 'Autumn' WHERE SongID = 5;
 
-UPDATE Songs
-SET weather = 'Rainy', season = 'Autumn'
-WHERE SongID = 2;
+-- Taylor Swift
+UPDATE Songs SET weather = 'Sunny', season = 'Spring' WHERE SongID = 6;
+UPDATE Songs SET weather = 'Rainy', season = 'Winter' WHERE SongID = 7;
+UPDATE Songs SET weather = 'Cloudy', season = 'Summer' WHERE SongID = 8;
+UPDATE Songs SET weather = 'Snowy', season = 'Autumn' WHERE SongID = 9;
+UPDATE Songs SET weather = 'Windy', season = 'Spring' WHERE SongID = 10;
 
-UPDATE Songs
-SET weather = 'Cloudy', season = 'Spring'
-WHERE SongID = 3;
+-- BTS
+UPDATE Songs SET weather = 'Sunny', season = 'Winter' WHERE SongID = 11;
+UPDATE Songs SET weather = 'Rainy', season = 'Spring' WHERE SongID = 12;
+UPDATE Songs SET weather = 'Cloudy', season = 'Summer' WHERE SongID = 13;
+UPDATE Songs SET weather = 'Snowy', season = 'Autumn' WHERE SongID = 14;
+UPDATE Songs SET weather = 'Windy', season = 'Winter' WHERE SongID = 15;
+
+-- Drake
+UPDATE Songs SET weather = 'Sunny', season = 'Summer' WHERE SongID = 16;
+UPDATE Songs SET weather = 'Rainy', season = 'Autumn' WHERE SongID = 17;
+UPDATE Songs SET weather = 'Cloudy', season = 'Spring' WHERE SongID = 18;
+UPDATE Songs SET weather = 'Snowy', season = 'Winter' WHERE SongID = 19;
+UPDATE Songs SET weather = 'Windy', season = 'Autumn' WHERE SongID = 20;
+
+-- Ariana Grande
+UPDATE Songs SET weather = 'Sunny', season = 'Spring' WHERE SongID = 21;
+UPDATE Songs SET weather = 'Rainy', season = 'Winter' WHERE SongID = 22;
+UPDATE Songs SET weather = 'Cloudy', season = 'Summer' WHERE SongID = 23;
+UPDATE Songs SET weather = 'Snowy', season = 'Autumn' WHERE SongID = 24;
+UPDATE Songs SET weather = 'Windy', season = 'Spring' WHERE SongID = 25;
+
+-- Billie Eilish
+UPDATE Songs SET weather = 'Sunny', season = 'Winter' WHERE SongID = 26;
+UPDATE Songs SET weather = 'Rainy', season = 'Spring' WHERE SongID = 27;
+UPDATE Songs SET weather = 'Cloudy', season = 'Summer' WHERE SongID = 28;
+UPDATE Songs SET weather = 'Snowy', season = 'Autumn' WHERE SongID = 29;
+UPDATE Songs SET weather = 'Windy', season = 'Winter' WHERE SongID = 30;
+
+-- Post Malone
+UPDATE Songs SET weather = 'Sunny', season = 'Summer' WHERE SongID = 31;
+UPDATE Songs SET weather = 'Rainy', season = 'Autumn' WHERE SongID = 32;
+UPDATE Songs SET weather = 'Cloudy', season = 'Spring' WHERE SongID = 33;
+UPDATE Songs SET weather = 'Snowy', season = 'Winter' WHERE SongID = 34;
+UPDATE Songs SET weather = 'Windy', season = 'Autumn' WHERE SongID = 35;
+
+-- The Weeknd
+UPDATE Songs SET weather = 'Sunny', season = 'Spring' WHERE SongID = 36;
+UPDATE Songs SET weather = 'Rainy', season = 'Winter' WHERE SongID = 37;
+UPDATE Songs SET weather = 'Cloudy', season = 'Summer' WHERE SongID = 38;
+UPDATE Songs SET weather = 'Snowy', season = 'Autumn' WHERE SongID = 39;
+UPDATE Songs SET weather = 'Windy', season = 'Spring' WHERE SongID = 40;
+
+-- Justin Bieber
+UPDATE Songs SET weather = 'Sunny', season = 'Winter' WHERE SongID = 41;
+UPDATE Songs SET weather = 'Rainy', season = 'Spring' WHERE SongID = 42;
+UPDATE Songs SET weather = 'Cloudy', season = 'Summer' WHERE SongID = 43;
+UPDATE Songs SET weather = 'Snowy', season = 'Autumn' WHERE SongID = 44;
+UPDATE Songs SET weather = 'Windy', season = 'Winter' WHERE SongID = 45;
+
+-- Dua Lipa
+UPDATE Songs SET weather = 'Sunny', season = 'Summer' WHERE SongID = 46;
+UPDATE Songs SET weather = 'Rainy', season = 'Autumn' WHERE SongID = 47;
+UPDATE Songs SET weather = 'Cloudy', season = 'Spring' WHERE SongID = 48;
+UPDATE Songs SET weather = 'Snowy', season = 'Winter' WHERE SongID = 49;
+UPDATE Songs SET weather = 'Windy', season = 'Autumn' WHERE SongID = 50;
+
+-- Khalid
+UPDATE Songs SET weather = 'Sunny', season = 'Spring' WHERE SongID = 51;
+UPDATE Songs SET weather = 'Rainy', season = 'Winter' WHERE SongID = 52;
+UPDATE Songs SET weather = 'Cloudy', season = 'Summer' WHERE SongID = 53;
+UPDATE Songs SET weather = 'Snowy', season = 'Autumn' WHERE SongID = 54;
+UPDATE Songs SET weather = 'Windy', season = 'Spring' WHERE SongID = 55;
+
+-- Maroon 5
+UPDATE Songs SET weather = 'Sunny', season = 'Winter' WHERE SongID = 56;
+UPDATE Songs SET weather = 'Rainy', season = 'Spring' WHERE SongID = 57;
+UPDATE Songs SET weather = 'Cloudy', season = 'Summer' WHERE SongID = 58;
+UPDATE Songs SET weather = 'Snowy', season = 'Autumn' WHERE SongID = 59;
+UPDATE Songs SET weather = 'Windy', season = 'Winter' WHERE SongID = 60;
+
+-- Harry Styles
+UPDATE Songs SET weather = 'Sunny', season = 'Summer' WHERE SongID = 61;
+UPDATE Songs SET weather = 'Rainy', season = 'Autumn' WHERE SongID = 62;
+UPDATE Songs SET weather = 'Cloudy', season = 'Spring' WHERE SongID = 63;
+UPDATE Songs SET weather = 'Snowy', season = 'Winter' WHERE SongID = 64;
+UPDATE Songs SET weather = 'Windy', season = 'Autumn' WHERE SongID = 65;
+
+-- Shawn Mendes
+UPDATE Songs SET weather = 'Sunny', season = 'Spring' WHERE SongID = 66;
+UPDATE Songs SET weather = 'Rainy', season = 'Winter' WHERE SongID = 67;
+UPDATE Songs SET weather = 'Cloudy', season = 'Summer' WHERE SongID = 68;
+UPDATE Songs SET weather = 'Snowy', season = 'Autumn' WHERE SongID = 69;
+UPDATE Songs SET weather = 'Windy', season = 'Spring' WHERE SongID = 70;
+
+-- Doja Cat
+UPDATE Songs SET weather = 'Sunny', season = 'Winter' WHERE SongID = 71;
+UPDATE Songs SET weather = 'Rainy', season = 'Spring' WHERE SongID = 72;
+UPDATE Songs SET weather = 'Cloudy', season = 'Summer' WHERE SongID = 73;
+UPDATE Songs SET weather = 'Snowy', season = 'Autumn' WHERE SongID = 74;
+UPDATE Songs SET weather = 'Windy', season = 'Winter' WHERE SongID = 75;

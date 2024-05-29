@@ -95,7 +95,7 @@ require_once 'header.inc.php';
             $hasPlaylists = false;
             while ($stmt->fetch()) {
                 $hasPlaylists = true;
-                echo '<a href="">Playlist Name: ' . $playlistName . '</a>';
+                echo '<a href="show_playlists.php?playlistID=' . $playlistID . '">Playlist Name: ' . $playlistName . '</a>';
                 echo '<br>';
                 echo '<br>';
             }

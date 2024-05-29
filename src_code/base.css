@@ -440,11 +440,41 @@ table td {
     font-weight: bold; 
 }
 
-/* --------------------------------
-    Styling for the update page (update_x.php)
-   -------------------------------- */
-.updatePageBody {
-    background-color:rgb(25, 20, 20);
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+/* Styling Show Album Page and Playlist (Similar styling)*/
+.AlbumPage {
+    max-width: 70%;
+    margin: 0 auto;
+    padding: 20px;
+    padding-top: 10px;
     color: #f2f2f2;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 200;
+}
+
+.addUserForm {
+    display: none;
+    margin-top: 20px;
+}
+.showFormButton {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.deleteButton {
+    border-radius: 15px;
+    background-color: #4CAF50;
+    text-align: right;
+    border: none;
+    margin-left: 10px;
+}
+
+#deleteIcon {
+    color: black;
 }

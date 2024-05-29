@@ -90,7 +90,7 @@ require_once 'header.inc.php';
             <button type="submit">Update</button>
         </form>
         <?php
-        echo '<button onclick="location.href=\'profile_view.php?id=' . $id . '\'">Return</button>';
+        echo '<button onclick="location.href=\'show_artist.php?id=' . $id . '\'">Return</button>';
     }
 
     $stmt->close();
