@@ -28,3 +28,14 @@ I want you all to create a similar setup with a front-facing interface for your 
 _Edit one of the tabs:_ include a form to allow filtering on some criteria you can use filter criteria from one of the queries that you already wrote when the user clicks "select/display/run/execute", it shows the relevant output<br />
 
 _Edit a second tab:_ include a form to allow an update operation you can use one of the update queries that you already wrote when the user clicks "update", it updates and shows some evidence of the update You will include a web-url (hopefully vergil server based URL) to access your database online as a comment in the submission.
+
+## Entity Relationship Diagram
+![Refined Tentative ER Model](https://github.com/andrewlim0619/Database-Systems/assets/114616307/18e55616-3b94-4e0a-bb9f-13248c7fcc33)
+
+## Relational Model/Schema
+![Refined Tentative RM Model](https://github.com/andrewlim0619/Database-Systems/assets/114616307/7bafb491-52cd-4149-89e8-f494dfb35a81)
+
+## GitHub Directory Guide
+__Supporting_Files__ - Supporting files provided by Instructor<br />
+__db_setup__ - Documentation, Relational Model, and Entity Relationship Diagram<br />
+__src_code__ - Source code for the website PHP Database<br />
