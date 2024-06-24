@@ -3,7 +3,7 @@ __Programmers:__ Andrew Lim, Omid Kazemini, Stanley Hsieh, Travis Khiem Huynh<br
 __Program:__ UW Bothell Music (Spotify) Database<br />
 __Quarter:__ Spring 2024, UW Bothell <br />
 __Faculty:__ Professor Himanshu Zade <br />
-__Live Website Link:__ https://students.washington.edu/alim26/index.php <br />
+__Live Website Link:__ https://students.washington.edu/alim26/SpotifyDB/index.php <br />
 
 ## List of Softwares Used
 __vergil__ - UW Shared Web Host Server for students ([vergil.u.washington.edu]): [Installation Tutorial](https://itconnect.uw.edu/tools-services-support/storage-hosting/shared-web-hosting/getting-started/web-development-environments/vergil-u-washington-edu/)<br />
